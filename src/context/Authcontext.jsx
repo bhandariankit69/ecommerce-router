@@ -2,8 +2,10 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  
 
   const login = (email, password) => {
     return new Promise((resolve, reject) => {
@@ -30,5 +32,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={{ user, login, guestLogin, logout }}>
       {children}
     </AuthContext.Provider>
+  
   );
+  
 }

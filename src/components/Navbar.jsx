@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/Authcontext";
+import { ThemeContext, ThemeProvider } from "../context/Themecontext";
 
 const links = [
   { to: "/", label: "Home", icon: "home" },
@@ -25,11 +26,13 @@ const icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
     </svg>
   ),
+   
 };
 
 export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
-
+  const {theme ,setTheme  }=useContext(ThemeContext);
+ console.log("value", theme);
   return (
     <aside className="fixed left-0 top-0 z-50 flex h-screen w-60 flex-col border-r border-gray-100 bg-white">
       <div className="flex h-16 items-center gap-3 border-b border-gray-100 px-5">
@@ -39,6 +42,7 @@ export default function Navbar() {
           </svg>
         </div>
         <div>
+        
           <p className="text-sm font-bold text-gray-900">Store</p>
           <p className="text-[11px] text-gray-400">Premium Shop</p>
         </div>
@@ -77,11 +81,20 @@ export default function Navbar() {
             {link.label}
           </NavLink>
         ))}
+        <p className="text-sm font-bold text-gray-1000">
+            <button onClick={() =>{ 
+              setTheme((theme)=>theme === "dark" ? "light" : "dark")
+                document.documentElement.classList.toggle('dark');
+            }
+          } className="truncate text-xs text-gray-400 hover:text-red-500" >
+              
+              🫥 theme</button>
+          </p>
       </nav>
 
       <div className="border-t border-gray-100 p-4">
         {user ? (
-          <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3">
+          <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3 ">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-xs font-semibold text-white">
               {user.name[0].toUpperCase()}
             </div>

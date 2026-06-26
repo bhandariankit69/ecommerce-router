@@ -24,7 +24,7 @@ export default function Categories() {
   return (
     <div className="p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-gray-900">Categories</h2>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white-900">Categories</h2>
         <span className="text-xs text-gray-400">{categories.length} categories</span>
       </div>
 

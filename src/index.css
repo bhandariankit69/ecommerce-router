@@ -5,3 +5,4 @@
     @apply antialiased text-gray-900 bg-gray-50;
   }
 }
+@custom-variant dark (&:where(.dark, .dark *));
