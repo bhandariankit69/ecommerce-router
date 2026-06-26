@@ -34,15 +34,15 @@ export default function Products() {
   return (
     <div className="p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-gray-900">
+        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
           {category ? `Category: ${category}` : "All Products"}
         </h2>
-        <span className="text-xs text-gray-400 dark:text-gray-400">{products.length} items</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500">{products.length} items</span>
       </div>
 
       {products.length === 0 ? (
         <div className="flex h-[40vh] items-center justify-center">
-          <p className="text-gray-400 dark:text-gray-400">No products found.</p>
+          <p className="text-gray-400 dark:text-gray-500">No products found.</p>
         </div>
       ) : (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">

@@ -23,7 +23,7 @@ function AppRoutes() {
       <Route
         path="*"
         element={
-          <div className="flex min-h-screen items-center justify-center text-gray-500">
+          <div className="flex min-h-screen items-center justify-center text-gray-500 dark:text-gray-400">
             Page not found
           </div>
         }

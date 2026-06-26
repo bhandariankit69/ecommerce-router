@@ -18,7 +18,7 @@ export default function ProductDetails() {
   if (loading) {
     return (
       <div className="flex h-[60vh] items-center justify-center">
-        <p className="text-gray-400">Loading product...</p>
+        <p className="text-gray-400 dark:text-gray-500">Loading product...</p>
       </div>
     );
   }
@@ -26,7 +26,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="flex h-[60vh] items-center justify-center">
-        <p className="text-gray-400">Product not found.</p>
+        <p className="text-gray-400 dark:text-gray-500">Product not found.</p>
       </div>
     );
   }
@@ -35,13 +35,13 @@ export default function ProductDetails() {
     <div className="mx-auto max-w-5xl px-6 py-10">
       <Link
         to="/"
-        className="mb-6 inline-block text-sm font-medium text-indigo-600 hover:underline"
+        className="mb-6 inline-block text-sm font-medium text-indigo-600 hover:underline dark:text-indigo-400"
       >
         ← Back
       </Link>
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-        <div className="flex items-center justify-center rounded-2xl bg-gray-50 p-8">
+        <div className="flex items-center justify-center rounded-2xl bg-gray-50 p-8 dark:bg-gray-800">
           <img
             src={product.thumbnail}
             alt={product.title}
@@ -50,24 +50,24 @@ export default function ProductDetails() {
         </div>
 
         <div className="flex flex-col justify-center">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
             {product.category}
           </p>
 
-          <h1 className="mb-3 text-3xl font-bold text-gray-900">
+          <h1 className="mb-3 text-3xl font-bold text-gray-900 dark:text-gray-100">
             {product.title}
           </h1>
 
           <div className="mb-4 flex items-center gap-3">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               ${product.price}
             </span>
-            <span className="flex items-center gap-1 rounded-full bg-yellow-50 px-2.5 py-1 text-sm font-medium text-yellow-700">
+            <span className="flex items-center gap-1 rounded-full bg-yellow-50 px-2.5 py-1 text-sm font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
               ★ {product.rating}
             </span>
           </div>
 
-          <p className="leading-relaxed text-gray-600">
+          <p className="leading-relaxed text-gray-600 dark:text-gray-400">
             {product.description}
           </p>
         </div>

@@ -21,21 +21,20 @@ export default function Home() {
       });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  
+  if (loading) return <p className="p-6 text-gray-400 dark:text-gray-500">Loading...</p>;
 
   return (
     <div>
       <Hero />
 
-      <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-lg font-bold">Featured Products</h2>
-        <span className="text-xs text-gray-400 dark:text-white">
+      <div className="mb-5 flex items-center justify-between px-10">
+        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Featured Products</h2>
+        <span className="text-xs text-gray-400 dark:text-gray-500">
           {products.length} items
         </span>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4 px-10">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

@@ -2,7 +2,7 @@
 
 @layer base {
   body {
-    @apply antialiased text-gray-900 bg-gray-50;
+    @apply antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-950;
   }
 }
 @custom-variant dark (&:where(.dark, .dark *));

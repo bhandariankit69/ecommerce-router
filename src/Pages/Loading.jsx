@@ -2,8 +2,8 @@ export default function Loading() {
   return (
     <div className="flex h-[60vh] items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600" />
-        <p className="text-sm text-gray-400">Loading...</p>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600 dark:border-indigo-900/50 dark:border-t-indigo-400" />
+        <p className="text-sm text-gray-400 dark:text-gray-500">Loading...</p>
       </div>
     </div>
   );

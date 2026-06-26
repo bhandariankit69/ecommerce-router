@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen bg-white  dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <Navbar />
       <main className="ml-60">
         <Outlet />
