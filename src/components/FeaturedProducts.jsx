@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard.jsx";
+import ProductCard from "./Productcard";
 
 export default function FeaturedProducts({ products, loading }) {
   return (

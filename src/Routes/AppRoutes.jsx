@@ -4,8 +4,10 @@ import Home from "../Pages/Home";
 import Products from "../Pages/Products";
 import Categories from "../Pages/Categories";
 import ProductDetails from "../Pages/ProductDetails";
-import SignIn from "../Pages/SignIn";
-import MainLayout from "../components/MainLayout";
+import Login from "../Pages/Login";
+import MainLayout from "../components/Mainlayout";
+import SignUp from "../Pages/Signup";
+
 
 function AppRoutes() {
   return (
@@ -18,8 +20,8 @@ function AppRoutes() {
         <Route path="product/:id" element={<ProductDetails />} />
       </Route>
 
-      <Route path="/signin" element={<SignIn />} />
-
+      <Route path="/signin" element={<Login />} />
+      <Route path="/signup" element={<SignUp/>} />
       <Route
         path="*"
         element={

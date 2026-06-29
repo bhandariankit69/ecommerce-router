@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Authcontext";
+import SignUp from "./Signup";
 
-export default function SignIn() {
+export default function Login() {
   const { login, guestLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -16,7 +17,18 @@ export default function SignIn() {
     setError("");
     setSubmitting(true);
     try {
-      await login(email, password);
+      const response= await axios.post(
+        "https://ecommerce-api-ten-jade.vercel.app/api/v1/auth/signup",
+        {
+          email,
+          password,
+
+        }
+      );
+    
+      
+      const token= response.data.accessToken;
+      localStorage.setItem("accessToken", token);
       navigate("/");
     } catch {
       setError("Invalid email or password");
@@ -61,6 +73,7 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-500 dark:focus:ring-indigo-900/30"
+            
             />
           </div>
 
@@ -86,6 +99,12 @@ export default function SignIn() {
           className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
         >
           Continue as Guest
+        </button>
+        <button
+          onClick={() => navigate("/signup")}
+           className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+        >
+          Sign Up
         </button>
       </div>
     </div>

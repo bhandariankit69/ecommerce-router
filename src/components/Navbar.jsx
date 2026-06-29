@@ -110,7 +110,7 @@ export default function Navbar() {
             to="/signin"
             className="flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
           >
-            Sign In
+            Log In
           </NavLink>
         )}
       </div>
