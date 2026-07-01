@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Authcontext";
+import axios from 'axios';
 import SignUp from "./Signup";
 
 export default function Login() {
@@ -17,21 +18,23 @@ export default function Login() {
     setError("");
     setSubmitting(true);
     try {
+      console.log("button clickerd");
       const response= await axios.post(
-        "https://ecommerce-api-ten-jade.vercel.app/api/v1/auth/signup",
+        "https://ecommerce-api-ten-jade.vercel.app/api/v1/auth/login",
         {
           email,
           password,
-
         }
       );
     
       
-      const token= response.data.accessToken;
+      const token= response.data.data.accessToken;
       localStorage.setItem("accessToken", token);
+      console.log("TOKEN:", token);
       navigate("/");
-    } catch {
-      setError("Invalid email or password");
+    } catch (error){
+      console.log(error);
+      // setError("Invalid email or password");
       setSubmitting(false);
     }
   };

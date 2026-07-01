@@ -38,11 +38,10 @@ const [lastName, setLastName] = useState("");
           lastName,
           email,
           password,
-
         }
       );
     
-      const token= response.data.accessToken;
+      const token= response.data.data.accessToken;
 
       localStorage.setItem("accessToken", token);
        
