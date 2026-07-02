@@ -7,7 +7,7 @@ export default function Categories() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/categories")
+    fetch("https://ecommerce-api-ten-jade.vercel.app//api/v1/products/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

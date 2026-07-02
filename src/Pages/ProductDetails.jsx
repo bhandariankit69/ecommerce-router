@@ -1,20 +1,72 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProduct(data);
-        setLoading(false);
-      });
+    const getProduct = async () => {
+      try {
+        const response = await axios.get(
+          `https://ecommerce-api-ten-jade.vercel.app/api/v1/products/${id}`
+        );
+  
+        setProduct(response.data.data.product);
+        console.log(response.data.data.product);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+  
+    getProduct();
   }, [id]);
+  const addToCart = async () => {
+  try {
+    const token = localStorage.getItem("accessToken");
+    console.log(token);
 
+    const response = await axios.post(
+      "https://ecommerce-api-ten-jade.vercel.app/api/v1/cart/items",
+      {
+        productId: product.id,
+        quantity: 1
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+useEffect(() => {
+  const getCart = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
+
+      const response = await axios.get(
+        "https://ecommerce-api-ten-jade.vercel.app/api/v1/cart",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getCart();
+}, []);
   if (loading) {
     return (
       <div className="flex h-[60vh] items-center justify-center">
@@ -43,7 +95,7 @@ export default function ProductDetails() {
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         <div className="flex items-center justify-center rounded-2xl bg-gray-50 p-8 dark:bg-gray-800">
           <img
-            src={product.thumbnail}
+            src={product.name}
             alt={product.title}
             className="max-h-96 w-full object-contain"
           />
@@ -51,7 +103,7 @@ export default function ProductDetails() {
 
         <div className="flex flex-col justify-center">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
-            {product.category}
+            {product.slug}
           </p>
 
           <h1 className="mb-3 text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -70,6 +122,8 @@ export default function ProductDetails() {
           <p className="leading-relaxed text-gray-600 dark:text-gray-400">
             {product.description}
           </p>
+          <button  onClick={() => addToCart(product)} className="mt-6 rounded-xl bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"> 
+            Add To CART </button>   
         </div>
       </div>
     </div>
