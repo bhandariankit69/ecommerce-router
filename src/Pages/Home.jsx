@@ -9,9 +9,11 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("https://dummyjson.com/products?limit=30")
+      .get("https://ecommerce-api-ten-jade.vercel.app/api/v1/products")
       .then((res) => {
-        setProducts(res.data.products || []);
+        console.log(res)
+        console.log(res.data.data.items)
+        setProducts(res.data.data.items || []);
         setLoading(false);
       })
       .catch((err) => {

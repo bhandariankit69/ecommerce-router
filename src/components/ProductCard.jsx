@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function ProductCard({ product }) {
+  
   return (
     <Link
       to={`/product/${product.id}`}

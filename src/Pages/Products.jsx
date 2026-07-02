@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/Productcard";
 import Loading from "./Loading";
 
 export default function Products() {
@@ -10,7 +10,22 @@ export default function Products() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+useEffect(() => {
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(
+        "https://ecommerce-api-ten-jade.vercel.app/api/v1/products"
+      );
 
+      setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getProducts();
+}, []);
   useEffect(() => {
     setLoading(true);
     const url = category
@@ -46,7 +61,7 @@ export default function Products() {
         </div>
       ) : (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
-          {products.map((product) => (
+          {products?.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

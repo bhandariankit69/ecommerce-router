@@ -7,6 +7,7 @@ import ProductDetails from "../Pages/ProductDetails";
 import Login from "../Pages/Login";
 import MainLayout from "../components/Mainlayout";
 import SignUp from "../Pages/Signup";
+import Cart from "../Pages/Cart";
 
 
 function AppRoutes() {
@@ -18,6 +19,7 @@ function AppRoutes() {
         <Route path="products" element={<Products />} />
         <Route path="categories" element={<Categories />} />
         <Route path="product/:id" element={<ProductDetails />} />
+        <Route path="cart" element={<Cart />} />
       </Route>
 
       <Route path="/signin" element={<Login />} />
