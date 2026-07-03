@@ -1,38 +1,33 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import apiClient from "../api";
 
 export const AuthContext = createContext();
-
-
-export function AuthProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  
 
-  const login = (email, password) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (email && password) {
-          setUser({ email, name: email.split("@")[0] });
-          resolve();
-        } else {
-          reject(new Error("Invalid credentials"));
-        }
-      }, 500);
-    });
+  //check if user is logged in when component mounts
+  useEffect(() => {
+    userStatus();
+  }, []);
+  async function userStatus() {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await apiClient.get("api/v1/auth/me");
+      console.log("userStaus", response);
+      console.log(response.data.data.user);
+      setUser(response.data.data.user);
+    } catch (error) {
+      localStorage.removeItem("accessToken");
+      console.log(error);
+      setUser(null);
+    }
+  }
+  const value = {
+    user: user,
+    setUser: setUser,
+    userStatus: userStatus,
+    isAuthenticated: !!user,
+    //it is short form of if else(if authenticated true else false)
   };
-
-  const guestLogin = () => {
-    setUser({ name: "Guest", email: "guest@store.com" });
-  };
-
-  const logout = () => {
-    setUser(null);
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, login, guestLogin, logout }}>
-      {children}
-    </AuthContext.Provider>
-  
-  );
-  
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
